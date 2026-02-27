@@ -10,6 +10,22 @@ Este projeto consiste em uma API RESTful robusta, desenvolvida para fornecer ser
 * **Abstração de Dados:** Spring Data JPA
 * **Padrão Arquitetural:** REST
 
+## 🗄️ Base de Dados e Infraestrutura
+
+O projeto foi validado utilizando dados reais e volumosos, garantindo que a arquitetura suporte cenários de alta demanda.
+
+- **Fonte de Dados:** Dados abertos do **Portal da Transparência do Governo Federal**, especificamente referentes ao **Novo Bolsa Família**.
+- **Banco de Dados:** **PostgreSQL** (instância local de ~2GB).
+- **Escalabilidade de Dados:** A aplicação foi projetada para processar grandes volumes de registros (Big Data) sem perda de performance, utilizando técnicas de paginação e critérios de busca otimizados.
+
+## ⚙️ Flexibilidade e Reutilização
+
+Embora o domínio atual seja focado no Bolsa Família, a arquitetura baseada em **Generics** e **Spring Data Specifications** permite que o sistema seja facilmente adaptado:
+
+* **Multitemático:** O motor de busca dinâmico pode ser acoplado a qualquer outro banco de dados de dados abertos ou sistemas legados (Ex: Saúde, Educação, Segurança).
+* **Portabilidade de Banco:** Graças ao uso do **Hibernate/JPA**, a migração para outros bancos de dados relacionais (MySQL, Oracle, SQL Server) exige o mínimo de alteração nas configurações.
+* **Preparado para Nuvem:** A estrutura está pronta para ser escalada horizontalmente em ambientes cloud, conectando-se a instâncias de banco de dados gerenciadas (como AWS RDS ou Google Cloud SQL).
+
 ## 🏗 Arquitetura do Sistema
 
 A aplicação foi estruturada em camadas para promover a separação de responsabilidades (Separation of Concerns):
