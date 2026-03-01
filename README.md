@@ -2,14 +2,6 @@
 
 Este projeto consiste em uma API RESTful robusta, desenvolvida para fornecer serviços de consulta de dados com alta performance e escalabilidade. O sistema utiliza uma arquitetura moderna e camadas bem definidas, garantindo facilidade na manutenção e integração com front-ends.
 
-## 🗄️ Base de Dados e Infraestrutura
-
-O projeto foi validado utilizando dados reais e volumosos, garantindo que a arquitetura suporte cenários de alta demanda.
-
-- **Fonte de Dados:** Dados abertos do **Portal da Transparência do Governo Federal**, especificamente referentes ao **Novo Bolsa Família**.
-- **Banco de Dados:** **PostgreSQL** (instância local de ~2GB).
-- **Escalabilidade de Dados:** A aplicação foi projetada para processar grandes volumes de registros (Big Data) sem perda de performance, utilizando técnicas de paginação e critérios de busca otimizados.
-
 ## 🛠 Tecnologias Utilizadas
 
 * **Linguagem:** Java
@@ -17,6 +9,14 @@ O projeto foi validado utilizando dados reais e volumosos, garantindo que a arqu
 * **Persistência:** Jakarta Persistence (JPA) com Hibernate
 * **Abstração de Dados:** Spring Data JPA
 * **Padrão Arquitetural:** REST
+
+## 🗄️ Base de Dados e Infraestrutura
+
+O projeto foi validado utilizando dados reais e volumosos, garantindo que a arquitetura suporte cenários de alta demanda.
+
+- **Fonte de Dados:** Dados abertos do **Portal da Transparência do Governo Federal**, especificamente referentes ao **Novo Bolsa Família**.
+- **Banco de Dados:** **PostgreSQL** (instância local de ~2GB).
+- **Escalabilidade de Dados:** A aplicação foi projetada para processar grandes volumes de registros (Big Data) sem perda de performance, utilizando técnicas de paginação e critérios de busca otimizados.
 
 ## ⚙️ Flexibilidade e Reutilização
 
