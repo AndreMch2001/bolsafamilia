@@ -2,12 +2,17 @@ package com.projeto.bolsafamilia.model;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "governo")
+@Table(name = "governo") //usado para certificar queo nome do tabela é mesmo do banco, caso contrário o hibernate pode tentar pluralizar ou usar camelCase ou até confundir o nome da tabela
 @Getter @Setter // Usando Lombok para não precisar escrever Getters e Setters
 public class Bolsafamiliamodel {
 

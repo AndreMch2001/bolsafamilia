@@ -1,19 +1,30 @@
+//serve para controlar o fluxo da minha API, os pedido que vem das URLs serão tratados aqui, e a lógica de negócio fica na camada de serviço,
+// e a camada de acesso a dados fica na camada de repositório
 package com.projeto.bolsafamilia.controller;
 
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.bolsafamilia.model.Bolsafamiliamodel;
 import com.projeto.bolsafamilia.repository.BolsafamiliaRepository;
+import com.projeto.bolsafamilia.service.BolsafamiliaService;
 
 import jakarta.persistence.criteria.Predicate;
-import java.util.ArrayList;
-import java.util.List;
-import java.math.BigDecimal;
+
 
 @RestController
 @RequestMapping("/api/Bolsafamiliamodel")
@@ -22,53 +33,22 @@ public class Bolsafamiliacontroller {
 
     @Autowired
     private BolsafamiliaRepository repository;
-
+    @Autowired
+    private BolsafamiliaService service;
+    //busca os dados do banco de dados, e retorna uma página de resultados, com base nos parâmetros de busca e paginação fornecidos na URL
+    //
     @GetMapping("/busca")
-    public Page<Bolsafamiliamodel> listar(
-            @RequestParam(required = false) String nome,
-            @RequestParam(required = false) String uf,
-            @RequestParam(required = false) String nomeMunicipio,
-            @RequestParam(required = false) String competencia,
-            @RequestParam(required = false) String nisFavorecido,
-            @RequestParam(required = false) BigDecimal valorMinimo,
-            @RequestParam(required = false) BigDecimal valorMaximo,
-            @RequestParam(defaultValue = "0") int pagina,
-            @RequestParam(defaultValue = "20") int tamanho) {
-        
-        Specification<Bolsafamiliamodel> spec = (root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            
-            if (nome != null && !nome.isEmpty()) {
-                predicates.add(cb.like(cb.lower(root.get("nomeFavorecido")), "%" + nome.toLowerCase() + "%"));
-            }
-            
-            if (uf != null && !uf.isEmpty()) {
-                predicates.add(cb.equal(cb.upper(root.get("uf")), uf.toUpperCase()));
-            }
-            
-            if (nomeMunicipio != null && !nomeMunicipio.isEmpty()) {
-                predicates.add(cb.like(cb.lower(root.get("nomeMunicipio")), "%" + nomeMunicipio.toLowerCase() + "%"));
-            }
-            
-            if (competencia != null && !competencia.isEmpty()) {
-                predicates.add(cb.equal(root.get("competencia"), competencia));
-            }
-            
-            if (nisFavorecido != null && !nisFavorecido.isEmpty()) {
-                predicates.add(cb.equal(root.get("nisFavorecido"), nisFavorecido));
-            }
-            
-            if (valorMinimo != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("valorParcela"), valorMinimo));
-            }
-            
-            if (valorMaximo != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("valorParcela"), valorMaximo));
-            }
-            
-            return cb.and(predicates.toArray(new Predicate[0]));
-        };
-        
-        return repository.findAll(spec, PageRequest.of(pagina, tamanho));
+    public 
+    
+    //encontra todos os dados do banco de dados, e retorna uma página de resultados, com base nos parâmetros de paginação fornecidos na URL
+    @GetMapping("/todos")
+    public Page<Bolsafamiliamodel> todosRegistros(
+        @RequestParam(defaultValue = "0") int pagina,
+        @RequestParam(defaultValue = "20") int tamanho) {
+
+    // Criamos a paginação explicitando que queremos ordenar pelo campo "id" de forma ASCENDENTE (do menor para o maior)
+    Pageable paginacao = PageRequest.of(pagina, tamanho, Sort.by("id").ascending());
+
+    return repository.findAll(paginacao);
     }
 }
