@@ -1,19 +1,17 @@
 package com.projeto.bolsafamilia.model;
 
 import java.math.BigDecimal;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "governo")
-@Getter @Setter // Usando Lombok para não precisar escrever Getters e Setters
+@Getter @Setter 
 public class Bolsafamiliamodel {
 
     @Id
-    // Se você já tem a coluna como PK e Serial no banco, 
-    // o IDENTITY é a opção correta, mas o Hibernate pode tentar validar.
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
